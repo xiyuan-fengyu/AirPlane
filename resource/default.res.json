@@ -1,0 +1,80 @@
+{
+	"groups": [
+		{
+			"keys": "egret_icon_png,description_json,bgm_0_ogg,bgm_1_ogg,bgm_2_ogg,effect_shoot_wav,map_1_jpg,enemy_1_0_png,bullet_1_tex_png,bullet_1_tex_json,bullet_1_ske_json,player_1_tex_png,player_1_tex_json,player_1_ske_json",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "sound/bgm/0.ogg",
+			"type": "sound",
+			"name": "bgm_0_ogg"
+		},
+		{
+			"url": "sound/bgm/1.ogg",
+			"type": "sound",
+			"name": "bgm_1_ogg"
+		},
+		{
+			"url": "sound/bgm/2.ogg",
+			"type": "sound",
+			"name": "bgm_2_ogg"
+		},
+		{
+			"url": "sound/effect/shoot.wav",
+			"type": "sound",
+			"name": "effect_shoot_wav"
+		},
+		{
+			"url": "map/map_1.jpg",
+			"type": "image",
+			"name": "map_1_jpg"
+		},
+		{
+			"url": "sprite/enemy/yellow/yellow_0.png",
+			"type": "image",
+			"name": "enemy_1_0_png"
+		},
+		{
+			"url": "sprite/bullet/1/bullet_1_tex.png",
+			"type": "image",
+			"name": "bullet_1_tex_png"
+		},
+		{
+			"url": "sprite/bullet/1/bullet_1_tex.json",
+			"type": "json",
+			"name": "bullet_1_tex_json"
+		},
+		{
+			"url": "sprite/bullet/1/bullet_1_ske.json",
+			"type": "json",
+			"name": "bullet_1_ske_json"
+		},
+		{
+			"url": "sprite/player/1/player_1_tex.png",
+			"type": "image",
+			"name": "player_1_tex_png"
+		},
+		{
+			"url": "sprite/player/1/player_1_ske.json",
+			"type": "json",
+			"name": "player_1_ske_json"
+		},
+		{
+			"url": "sprite/player/1/player_1_tex.json",
+			"type": "json",
+			"name": "player_1_tex_json"
+		}
+	]
+}
