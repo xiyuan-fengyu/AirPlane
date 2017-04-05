@@ -15,16 +15,15 @@ class BaseLevel extends DisplayObjectContainer {
     $onAddToStage(stage: egret.Stage, nestLevel: number): void {
         super.$onAddToStage(stage, nestLevel);
 
-        this.bgm = RES.getRes("bgm_0_ogg");
-        this.bgm.play();
+        // this.bgm = RES.getRes("bgm_0_ogg");
+        // this.bgm.play();
 
         this.createWorld();
         this.createMap("map_1_jpg");
 
         this.player = new Player(this, this.world);
-        new Enemy(this, this.world, this.stage.stageWidth / 4, 300);
-        new Enemy(this, this.world, this.stage.stageWidth / 4 * 2, 200);
-        new Enemy(this, this.world, this.stage.stageWidth / 4 * 3, 300);
+
+        this.createEnemyGenerator();
     }
 
     private createWorld() {
@@ -104,6 +103,14 @@ class BaseLevel extends DisplayObjectContainer {
                 }
                 mapItem.y += delta;
             }
+        }, this);
+        timer.start();
+    }
+
+    private createEnemyGenerator() {
+        let timer = new egret.Timer(3000);
+        timer.addEventListener(egret.TimerEvent.TIMER, event => {
+            new Enemy(this, this.world, (Math.random() * 0.6 + 0.2) * this.stage.stageWidth, -100);
         }, this);
         timer.start();
     }

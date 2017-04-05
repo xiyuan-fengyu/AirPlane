@@ -7,9 +7,9 @@ class EjectionRaySkill extends BaseSkill {
 
     private maxRayWidth: number = 6;
 
-    private rayColor: number = 0xff490d;
+    private rayColor: number = 0xE35867;
 
-    private maxPathNum: number = 10;
+    private maxPathNum: number = 15;
 
     private rayWidthChangeRate: number = Math.pow(this.maxRayWidth, 1 / this.maxPathNum);
 
@@ -19,12 +19,21 @@ class EjectionRaySkill extends BaseSkill {
 
     private contractMax = 5;
 
+    private velocityDeltaRate = 0.4;
+
     private lastTarget: Enemy;
 
     private nextTarget: Enemy;
 
+    //每穿透一个敌人，伤害衰减为当前的0.8
+    private power: number = 100;
+
+    private powerDeltaRate = 0.8;
+
     constructor(ctx: egret.DisplayObjectContainer, world: p2.World, x: number, y: number) {
         super(ctx, world, "EjectionRaySkill");
+
+        this.maxSpeed = 35;
 
         this.safeBounds = {
             left: -200,
@@ -45,6 +54,7 @@ class EjectionRaySkill extends BaseSkill {
             width: this.maxRayWidth,
             height: this.maxRayWidth
         });
+        this._body.velocity[1] = this.maxSpeed;
         this._body.collisionResponse = false;
         this._body.position = [x / BaseBody.factor, (this.ctx.stage.stageHeight - y) / BaseBody.factor];
         this.ray.x = 0;
@@ -57,15 +67,22 @@ class EjectionRaySkill extends BaseSkill {
             if (otherSprite instanceof Enemy && (this.lastTarget != otherSprite)) {
                 if (this.contactIndex < this.contractMax) {
                     this.contactIndex += 1;
+
+                    this.nextTarget = otherSprite;
                     this.findNextTarget();
                 }
+                else {
+                    this.nextTarget = null;
+                }
+
+                (<Enemy>otherSprite).takeDamage(this.power);
+                this.power *= this.powerDeltaRate;
             }
         }
     }
 
     private findNextTarget() {
-        let otherEnemys = this._world.bodies.filter(body => body instanceof BaseBody && (<BaseBody>body).sprite.flag == "Enemy")
-            .map(body => <Enemy>(<BaseBody>body).sprite).filter(enemy => enemy != this.nextTarget);
+        let otherEnemys = this.findSpriteByFlag<Enemy>("Enemy").filter(enemy => enemy != this.nextTarget);
         if (otherEnemys.length > 0) {
             this.lastTarget = this.nextTarget;
             this.nextTarget = otherEnemys[parseInt("" + Math.random() * otherEnemys.length)];
@@ -73,20 +90,25 @@ class EjectionRaySkill extends BaseSkill {
     }
 
     beforeWorldUpdate(delta: number) {
-        if (!this.nextTarget || this.contactIndex == this.contractMax) {
-            this._body.velocity = [Math.random() * 20 - 10, 35];
-        }
-        else {
+        if (this.nextTarget && !this.nextTarget.destroyed && this.contactIndex < this.contractMax) {
             let x = this._body.position[0];
             let y = this._body.position[1];
 
             let targetX = this.nextTarget.body.position[0];
             let targetY = this.nextTarget.body.position[1];
 
-            let vec = [targetX - x, targetY - y];
-            let vecLen = Math.pow(vec[0] * vec[0] + vec[1] * vec[1], 0.5);
-            if (vecLen > 0) {
-                this._body.velocity = [36 * vec[0] / vecLen, 36 * vec[1] / vecLen];
+            let targetV = [targetX - x, targetY - y];
+            let curV = this._body.velocity;
+            let targetVLen = Math.pow(targetV[0] * targetV[0] + targetV[1] * targetV[1], 0.5);
+            if (targetVLen > 0) {
+                targetV[0] = targetV[0] / targetVLen * this.maxSpeed;
+                targetV[1] = targetV[1] / targetVLen * this.maxSpeed;
+                let deltaV = [(targetV[0] - curV[0]) * this.velocityDeltaRate, (targetV[1] - curV[1]) * this.velocityDeltaRate];
+                let newV = [curV[0] + deltaV[0], curV[1] + deltaV[1]];
+                let newVLen = Math.pow(newV[0] * newV[0] + newV[1] * newV[1], 0.5);
+                newV[0] = newV[0] / newVLen * this.maxSpeed;
+                newV[1] = newV[1] / newVLen * this.maxSpeed;
+                this._body.velocity = newV;
             }
         }
     }

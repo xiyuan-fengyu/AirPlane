@@ -73,7 +73,7 @@ class BaseBody extends p2.Body {
             BaseBody.dragonBonesFactory.parseTextureAtlasData(RES.getRes(dbName + "_tex_json"), RES.getRes(dbName + "_tex_png"))
         }
 
-        let display = BaseBody.dragonBonesFactory.buildArmatureDisplay(data.armatureNames[0]);
+        let display = BaseBody.dragonBonesFactory.buildArmatureDisplay(data.armatureNames[0], data.name);
 
         let body = new BaseBody({
             mass: 1
@@ -116,8 +116,8 @@ class BaseBody extends p2.Body {
         }
 
         this.position = [
-            x / BaseBody.factor,
-            (this._sprite.ctx.stage.stageHeight - y) / BaseBody.factor
+            x,
+            y
         ];
     }
 

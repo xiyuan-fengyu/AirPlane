@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "egret_icon_png,description_json,bgm_0_ogg,bgm_1_ogg,bgm_2_ogg,effect_shoot_wav,map_1_jpg,enemy_1_0_png,bullet_1_tex_png,bullet_1_tex_json,bullet_1_ske_json,player_1_tex_png,player_1_tex_json,player_1_ske_json",
+			"keys": "egret_icon_png,description_json,bgm_0_ogg,bgm_1_ogg,bgm_2_ogg,effect_shoot_wav,map_1_jpg,bullet_1_tex_png,bullet_1_tex_json,bullet_1_ske_json,player_1_tex_png,player_1_tex_json,player_1_ske_json,enemy_1_ske_json,enemy_1_tex_json,enemy_1_tex_png",
 			"name": "preload"
 		}
 	],
@@ -42,11 +42,6 @@
 			"name": "map_1_jpg"
 		},
 		{
-			"url": "sprite/enemy/yellow/yellow_0.png",
-			"type": "image",
-			"name": "enemy_1_0_png"
-		},
-		{
 			"url": "sprite/bullet/1/bullet_1_tex.png",
 			"type": "image",
 			"name": "bullet_1_tex_png"
@@ -75,6 +70,21 @@
 			"url": "sprite/player/1/player_1_tex.json",
 			"type": "json",
 			"name": "player_1_tex_json"
+		},
+		{
+			"url": "sprite/enemy/1/enemy_1_tex.png",
+			"type": "image",
+			"name": "enemy_1_tex_png"
+		},
+		{
+			"url": "sprite/enemy/1/enemy_1_ske.json",
+			"type": "json",
+			"name": "enemy_1_ske_json"
+		},
+		{
+			"url": "sprite/enemy/1/enemy_1_tex.json",
+			"type": "json",
+			"name": "enemy_1_tex_json"
 		}
 	]
 }

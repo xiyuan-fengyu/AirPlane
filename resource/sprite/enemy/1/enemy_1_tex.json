@@ -1,0 +1,1 @@
+{"SubTexture":[{"width":48,"y":59,"height":49,"name":"enemy_0","x":63},{"width":39,"y":61,"height":52,"name":"enemy_1","x":1},{"width":19,"y":61,"height":54,"name":"enemy_2","x":42},{"width":58,"y":1,"height":56,"name":"explosion_1","x":63},{"width":60,"y":1,"height":58,"name":"explosion_0","x":1}],"name":"AirPlane_Enemy","imagePath":"enemy_1_tex.png"}

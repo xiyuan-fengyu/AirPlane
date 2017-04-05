@@ -81,7 +81,15 @@ class Player extends BaseSprite {
             if (this.normalShootTime >= this.normalShootRate) {
                 this.normalShootTime = 0;
                 let display = this._body.displays[0];
-                // new Bullet(this.ctx, this.world, display.x, display.y - display.height / 2);
+                new Bullet(this.ctx, this.world, display.x, display.y - display.height / 2);
+            }
+        }
+
+        //使用EjectionRaySkill,目前仅测试用，没有冷却和能量检测
+        if (this.keyStatus.i == true) {
+            if (this.normalShootTime >= this.normalShootRate) {
+                this.normalShootTime = 0;
+                let display = this._body.displays[0];
                 new EjectionRaySkill(this.ctx, this.world, display.x, display.y - display.height / 2);
             }
         }
